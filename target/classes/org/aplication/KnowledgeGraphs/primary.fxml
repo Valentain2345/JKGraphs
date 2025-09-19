@@ -8,59 +8,66 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="459.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aplication.KnowledgeGraphs.PrimaryController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="721.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aplication.KnowledgeGraphs.PrimaryController">
    <children>
-      <VBox prefHeight="462.0" prefWidth="433.0">
+      <HBox prefHeight="33.0" prefWidth="568.0">
          <children>
-            <HBox prefHeight="33.0" prefWidth="568.0">
-               <children>
-                  <MenuButton mnemonicParsing="false" text="MenuButton">
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+               <contextMenu>
+                  <ContextMenu>
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                    <items>
+                        <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
                       <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
                     </items>
-                     <contextMenu>
-                        <ContextMenu>
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                          </items>
-                        </ContextMenu>
-                     </contextMenu>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="MenuButton">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <Menu mnemonicParsing="false" text="Unspecified Menu">
-                          <items>
-                              <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                            <MenuItem mnemonicParsing="false" text="Action 1" />
-                          </items>
-                        </Menu>
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="MenuButton">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" text="Grafo">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Graficar" onAction="#showGraph" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
-               </children>
-            </HBox>
+                  </Menu>
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Grafo">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Graficar" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+         </children>
+      </HBox>
+      <VBox prefHeight="645.0" prefWidth="676.0">
+         <children>
             <Label text="Primary View" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido a la app" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Escribir una query de sparql" />
+            <TextArea prefHeight="315.0" prefWidth="695.0" />
+            <VBox alignment="CENTER" prefHeight="12.0" prefWidth="558.0">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#executeQuery" text="Button" />
+               </children>
+            </VBox>
          </children>
       </VBox>
       <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Switch to Secondary View" />

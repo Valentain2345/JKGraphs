@@ -1,14 +1,14 @@
 package org.aplication.KnowledgeGraphs;
 
+import java.io.IOException;
+
+import org.logicaGrafo.GrafosJena;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import org.logicaGrafo.GrafosJena;
 /**
  * JavaFX App
  */
@@ -22,9 +22,10 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();
-        new GrafosJena().crearGrafoYAgregarElemento();
+        new GrafosJena();
+		GrafosJena.crearGrafoYAgregarElemento();
 	    }
-    
+
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

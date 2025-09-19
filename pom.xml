@@ -10,14 +10,10 @@
 	<repositories>
 	</repositories>
 	<properties>
-<configuration-vmArgs46>--add-opens java.base/java.lang.ref=ALL-UNNAMED</configuration-vmArgs46>
-<configuration-vmArgs>
-            --add-opens java.base/java.lang.ref=ALL-UNNAMED
-          </configuration-vmArgs>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javafx.version>21</javafx.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 
 	<dependencies>
