@@ -3,6 +3,7 @@
 <head>
     <title>Cytoscape.js in JavaFX</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-edgehandles@4.0.1/cytoscape-edgehandles.js"></script>
     <style>
         #cy {
             width: 100%;
@@ -19,6 +20,17 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+        }
+        .eh-handle {
+            background-color: red;
+            width: 12px;
+            height: 12px;
+            border: 2px solid darkred;
+            border-radius: 50%;
+        }
+        .eh-preview, .eh-ghost-edge {
+            line-color: red;
+            target-arrow-color: red;
         }
     </style>
 </head>
@@ -43,7 +55,7 @@
                 elements: [
                     { data: { id: 'a' } },
                     { data: { id: 'b' } },
-                    { data: { source: 'a', target: 'b' } }
+                    { data: { id: 'ab', source: 'a', target: 'b' } }
                 ],
                 style: [
                     {
@@ -82,6 +94,11 @@
                             'target-arrow-color': '#A9B7C6',
                             'target-arrow-shape': 'triangle',
                             'curve-style': 'bezier',
+                            'label': 'data(label)',
+                            'font-size': '10px',
+                            'color': '#666',
+                            'text-rotation': 'autorotate',
+                            'text-margin-y': -10,
                             'transition-property': 'line-color',
                             'transition-duration': '0.3s'
                         }
@@ -102,23 +119,63 @@
                     }
                 ],
                 layout: {
-                    name: 'grid',
-                    rows: 1,
-                    animate: true,
-                    animationDuration: 500
+                    name: 'cose',
+                    idealEdgeLength: 100,
+                    nodeOverlap: 20,
+                    refresh: 20,
+                    fit: true,
+                    padding: 30,
+                    randomize: false,
+                    componentSpacing: 100,
+                    nodeRepulsion: 400000,
+                    edgeElasticity: 100,
+                    nestingFactor: 5,
+                    gravity: 80,
+                    numIter: 1000,
+                    initialTemp: 200,
+                    coolingFactor: 0.95,
+                    minTemp: 1.0
                 }
             });
 
             log('Cytoscape.js initialized successfully');
 
+         
             // Function to add nodes dynamically
-            window.addNode = function(id) {
+            window.addNode = function() {
                 try {
+                    var id = 'n' + Date.now();
                     cy.add({ data: { id: id } });
-                    cy.layout({ name: 'grid', animate: true }).run();
+                    cy.layout({ name: 'cose', animate: true }).run();
                     log('Added node: ' + id);
                 } catch (e) {
                     log('Error adding node: ' + e.message);
+                }
+            };
+			
+			
+            window.loadCytoscapeData = function(data) {
+                log("loadCytoscapeData function called");
+                try {
+                    if (typeof data === 'string') {
+                        log("Parsing data string to JSON");
+                        data = JSON.parse(data);
+                    }
+                    
+                    var elements = (data && Array.isArray(data.elements)) ? data.elements : [];
+
+                    if (elements.length > 0) {
+                        log("Adding elements to Cytoscape instance.");
+                        cy.elements().remove();
+                        cy.add(elements);
+                        cy.layout({ name: 'cose' }).run();
+                        log('Cytoscape data loaded from Java');
+                    } else {
+                        log('No data to display. Clearing graph.');
+                        cy.elements().remove(); // Clear the graph if no data
+                    }
+                } catch (e) {
+                    log('Error loading Cytoscape data: ' + e.message);
                 }
             };
 

@@ -3,12 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
@@ -19,55 +15,34 @@
    <children>
       <HBox prefHeight="33.0" prefWidth="568.0">
          <children>
-            <MenuButton mnemonicParsing="false" text="MenuButton">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-              </items>
-               <contextMenu>
-                  <ContextMenu>
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                    </items>
-                  </ContextMenu>
-               </contextMenu>
-            </MenuButton>
-            <MenuButton mnemonicParsing="false" text="MenuButton">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                    <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
-            <MenuButton mnemonicParsing="false" text="MenuButton">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
             <MenuButton mnemonicParsing="false" text="Grafo">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Graficar" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Datos">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="Abrir local" />
+                <MenuItem mnemonicParsing="false" onAction="#abrirRemoto" text="Abrir remoto" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Exportar">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#exportRdfXml" text="RDF/XML" />
+                <MenuItem mnemonicParsing="false" onAction="#exportTurtle" text="Turtle" />
+                <MenuItem mnemonicParsing="false" onAction="#exportNTriples" text="N-Triples" />
+                <MenuItem mnemonicParsing="false" onAction="#exportRdfJson" text="RDF/JSON" />
               </items>
             </MenuButton>
          </children>
       </HBox>
       <VBox prefHeight="645.0" prefWidth="676.0">
          <children>
-            <Label text="Primary View" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Escribir una query de sparql" />
-            <TextArea fx:id="queryInput" prefHeight="224.0" prefWidth="687.0" />
+            <TextArea fx:id="queryInput" prefHeight="224.0" prefWidth="687.0" text="SELECT  ?s ?p ?o &#10;WHERE { ?s ?p ?o }&#10;LIMIT 10" />
             <VBox alignment="CENTER" prefHeight="44.0" prefWidth="693.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#executeQuery" text="Button" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#executeQuery" text="Execute Query" />
                </children>
             </VBox>
             <TableView fx:id="queryResultsTable" prefHeight="327.0" prefWidth="701.0">
@@ -75,10 +50,9 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TableView>
-             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DisplayError" fx:id="errorMessage" />
+             <Text fx:id="errorMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
          </children>
       </VBox>
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Switch to Secondary View" />
    </children>
    <padding>
       <Insets bottom="20.0" left="5.0" right="20.0" top="5.0" />
