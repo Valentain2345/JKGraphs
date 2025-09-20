@@ -1,5 +1,10 @@
 package org.logicaGrafo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -39,20 +44,43 @@ public class GrafosJena {
     }
 
 
-    public void ejecutarConsultaSPARQL(String consulta) {
-    	RDFConnection conn = RDFConnection.connect("https://www.w3.org/1999/02/22-rdf-syntax-ns#");
-    			Dataset data= conn.fetchDataset() ;
-    			QueryExecution qExec = QueryExecutionFactory.create("SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 100", data) ;
-    			ResultSet rs = qExec.execSelect() ;
-    			while(rs.hasNext()) {
-    			  QuerySolution qs = rs.next() ;
-    			  Resource s = qs.getResource("s") ;
-    			  Resource p = qs.getResource("p");
-    			  RDFNode o = qs.get("o") ;
-    			  System.out.println(s+" "+p+" "+o.toString()) ;
-    			}
-    			qExec.close() ;
-    			conn.close() ;
-	}
+    public SparqlQueryResult ejecutarConsultaSPARQL(String consulta) {
+        List<String> variables = new ArrayList<>();
+        List<Map<String, String>> rows = new ArrayList<>();
+        String error = null;
+        RDFConnection conn = null;
+        Dataset data = null;
+        try {
+            conn = RDFConnection.connect("https://www.w3.org/1999/02/22-rdf-syntax-ns#");
+            data = conn.fetchDataset();
+        } catch (Exception e) {
+            error = "Error al conectar con el endpoint SPARQL: " + e.getMessage();
+        }
+        if (data == null) {
+            if (error == null) error = "No se pudo obtener el dataset del endpoint SPARQL.";
+            return new SparqlQueryResult(variables, rows, error);
+        }
+        QueryExecution qExec = null;
+        try {
+            qExec = QueryExecutionFactory.create(consulta, data);
+            ResultSet rs = qExec.execSelect();
+            variables.addAll(rs.getResultVars());
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                Map<String, String> row = new HashMap<>();
+                for (String var : variables) {
+                    RDFNode node = qs.get(var);
+                    row.put(var, node != null ? node.toString() : "");
+                }
+                rows.add(row);
+            }
+        } catch (Exception e) {
+            error = "Error al ejecutar la consulta SPARQL: " + e.getMessage();
+        } finally {
+            if (qExec != null) qExec.close();
+            if (conn != null) conn.close();
+        }
+        return new SparqlQueryResult(variables, rows, error);
+    }
 
 }

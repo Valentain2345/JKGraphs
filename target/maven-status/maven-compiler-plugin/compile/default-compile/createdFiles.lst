@@ -2,5 +2,7 @@ org/aplication/KnowledgeGraphs/PrimaryController.class
 org/aplication/KnowledgeGraphs/SecondaryController.class
 org/aplication/KnowledgeGraphs/App.class
 org/aplication/KnowledgeGraphs/CytoscapeWindow.class
+org/logicaGrafo/SparqlQueryResult.class
+org/aplication/KnowledgeGraphs/ResultRow.class
 org/aplication/KnowledgeGraphs/Main.class
 org/logicaGrafo/GrafosJena.class
