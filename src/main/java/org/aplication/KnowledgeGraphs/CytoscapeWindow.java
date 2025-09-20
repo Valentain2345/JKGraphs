@@ -2,7 +2,6 @@ package org.aplication.KnowledgeGraphs;
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
@@ -36,25 +35,11 @@ public class CytoscapeWindow {
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(event -> reloadGraphData());
 
-        Button addNodeButton = new Button("Add Node");
-        addNodeButton.setOnAction(event -> {
-            if (isWebViewReady()) {
-                JSObject window = (JSObject) webEngine.executeScript("window");
-                window.call("addNode");
-            }
-        });
+     
 
-        ToggleButton addEdgeToggleButton = new ToggleButton("Add Edge");
-        addEdgeToggleButton.setOnAction(event -> {
-            if (isWebViewReady()) {
-                JSObject window = (JSObject) webEngine.executeScript("window");
-                window.call("toggleEdgeMode", addEdgeToggleButton.isSelected());
-            }
-        });
-
-        HBox controls = new HBox(5, refreshButton, addNodeButton, addEdgeToggleButton);
+        HBox controls = new HBox(5, refreshButton);
         VBox root = new VBox(controls, webView);
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Cytoscape.js Graph Window");
 
@@ -64,7 +49,6 @@ public class CytoscapeWindow {
                 window.setMember("javaApp", new JavaApp());
                 webEngine.executeScript("console.log = function(message) { javaApp.log(message); };");
                 webEngine.executeScript("console.log('Cytoscape.js loaded in JavaFX');");
-
                 if (pendingJson != null) {
                     loadDataIntoWebView(pendingJson);
                     pendingJson = null;
@@ -77,6 +61,7 @@ public class CytoscapeWindow {
         return webEngine.getLoadWorker().getState() == Worker.State.SUCCEEDED;
     }
 
+    
     public class JavaApp {
         public void log(String message) {
             System.out.println("JS Console: " + message);
