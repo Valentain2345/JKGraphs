@@ -1,5 +1,9 @@
 package org.logicaGrafo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +22,12 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdfconnection.RDFConnection;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
+import org.apache.jena.riot.RDFLanguages;
+import org.apache.jena.riot.RDFParser;
+import org.apache.jena.riot.system.ErrorHandlerFactory;
 
 public class GrafosJena {
 
@@ -25,14 +35,58 @@ public class GrafosJena {
 
 	// Método para cargar un grafo RDF desde un archivo
 	public SparqlQueryResult cargarGrafoDesdeArchivo(String rutaArchivo) {
-		Model model=ModelFactory.createDefaultModel();
 		try {
-			model.read(rutaArchivo);
+			String resolvedPath = rutaArchivo;
+			File file = new File(rutaArchivo);
+			
+			if (!file.exists() || !file.canRead()) {
+				return SparqlQueryResult.forBottomMsg("El archivo no existe o no se puede leer: " + resolvedPath);
+			}
+
+		
+			Model model;
+			try {
+				model = RDFDataMgr.loadModel(resolvedPath);
+				} catch (Exception e) {
+				return SparqlQueryResult.forBottomMsg("Error al leer el archivo RDF: " + e.getMessage());
+				}
+
+			if (model.isEmpty()) {
+				return SparqlQueryResult.forBottomMsg("El modelo RDF está vacío después de cargar el archivo. Verifique el formato y el contenido.");
+			}
+
 			dataset.setDefaultModel(model);
+
+			try {
+				dataset = RDFDataMgr.loadDataset(resolvedPath);
+			} catch (Exception e) {
+				SparqlQueryResult.forBottomMsg(" Error al cargar el dataset: " + e.getMessage());
+			}
+
 			return SparqlQueryResult.forBottomMsg("Archivo cargado correctamente");
 		} catch(Exception e) {
 			return SparqlQueryResult.forBottomMsg("Error al cargar el grafo desde el archivo: " + e.getMessage());
 		}
+	}
+
+	public SparqlQueryResult cargarGrafoFormatoInusual(String rutaArchivo, Lang formato) {
+		    // The parsers will do the necessary character set conversion.  
+		    try (FileInputStream in = new FileInputStream(rutaArchivo)) {
+		        dataset = 
+		            RDFParser.create()
+		                .source(in)
+		                .lang(formato) 
+		                .errorHandler(ErrorHandlerFactory.errorHandlerStrict)
+		                .base("http://example/base")
+		                .toDataset();
+		    } catch (FileNotFoundException e) {
+		    	return SparqlQueryResult.forBottomMsg("Archivo no encontrado "+ e.getMessage());
+			} catch (IOException e) {
+				
+				return SparqlQueryResult.forBottomMsg("Error leyendo archivo "+ e.getMessage());
+			}
+		    
+		    return SparqlQueryResult.forBottomMsg("Archivo cargado correctamente en formato "+formato.getName() );
 	}
 
 	// Método para cargar un grafo RDF desde una URL
@@ -142,7 +196,6 @@ public class GrafosJena {
                     if (o.startsWith("http://") || o.startsWith("https://") || o.startsWith("urn:")) {
                         model.add(model.createResource(s), model.createProperty(p), model.createResource(o));
                     } else if (o.startsWith("_:") || o.startsWith("[")) {
-                        // Blank node or bnode string
                         model.add(model.createResource(s), model.createProperty(p), model.createResource(o));
                     } else {
                         model.add(model.createResource(s), model.createProperty(p), model.createLiteral(o));

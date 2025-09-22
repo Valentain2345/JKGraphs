@@ -38,7 +38,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>org.aplication.KnowledgeGraphs.App</mainClass>
+                  <mainClass>org.aplication.KnowledgeGraphs.Main</mainClass>
                 </transformer>
               </transformers>
               <minimizeJar>false</minimizeJar>
@@ -52,39 +52,26 @@
                   </excludes>
                 </filter>
               </filters>
+              <createDependencyReducedPom>true</createDependencyReducedPom>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>hypergraphdb</id>
-      <url>http://hypergraphdb.org/maven</url>
-    </repository>
-    <repository>
-      <snapshots />
-      <id>oss-sonatype</id>
-      <name>oss-sonatype</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </repository>
-  </repositories>
   <dependencies>
     <dependency>
       <groupId>org.apache.jena</groupId>
       <artifactId>apache-jena-libs</artifactId>
-      <version>5.5.0</version>
+      <version>4.8.0</version>
       <type>pom</type>
       <scope>compile</scope>
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <configuration-vmArgs46>--add-opens java.base/java.lang.ref=ALL-UNNAMED</configuration-vmArgs46>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javafx.version>21</javafx.version>
-    <configuration-vmArgs>--add-opens java.base/java.lang.ref=ALL-UNNAMED</configuration-vmArgs>
   </properties>
 </project>
