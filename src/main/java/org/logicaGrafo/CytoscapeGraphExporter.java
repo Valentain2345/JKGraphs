@@ -1,13 +1,14 @@
 package org.logicaGrafo;
 
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.Resource;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.io.FileWriter;
 import java.util.HashSet;
 import java.util.Set;
-import java.io.FileWriter;
+
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Statement;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Utility class to export a Jena Model to Cytoscape.js compatible JSON.
@@ -27,7 +28,8 @@ public class CytoscapeGraphExporter {
             // Add subject node
             if (!nodeIds.contains(subjectId)) {
                 JSONObject node = new JSONObject();
-                node.put("data", new JSONObject().put("id", subjectId));
+                String color = String.format("#%06X", (int)(Math.random() * 0xFFFFFF));
+                node.put("data", new JSONObject().put("id", subjectId).put("color", color));
                 nodes.put(node);
                 nodeIds.add(subjectId);
             }
@@ -35,7 +37,8 @@ public class CytoscapeGraphExporter {
             // Add object node if it's a resource
             if (objectId != null && !nodeIds.contains(objectId)) {
                 JSONObject node = new JSONObject();
-                node.put("data", new JSONObject().put("id", objectId));
+                String color = String.format("#%06X", (int)(Math.random() * 0xFFFFFF));
+                node.put("data", new JSONObject().put("id", objectId).put("color", color));
                 nodes.put(node);
                 nodeIds.add(objectId);
             }

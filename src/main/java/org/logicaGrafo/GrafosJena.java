@@ -24,23 +24,25 @@ public class GrafosJena {
 	Dataset dataset=DatasetFactory.create();
 
 	// Método para cargar un grafo RDF desde un archivo
-	public void cargarGrafoDesdeArchivo(String rutaArchivo) {
+	public SparqlQueryResult cargarGrafoDesdeArchivo(String rutaArchivo) {
 		Model model=ModelFactory.createDefaultModel();
 		try {
-		model.read(rutaArchivo);
-		dataset.setDefaultModel(model);
-		}catch(Exception e) {
-			System.err.println("Error al cargar el grafo desde el archivo: " + e.getMessage());
+			model.read(rutaArchivo);
+			dataset.setDefaultModel(model);
+			return SparqlQueryResult.forBottomMsg("Archivo cargado correctamente");
+		} catch(Exception e) {
+			return SparqlQueryResult.forBottomMsg("Error al cargar el grafo desde el archivo: " + e.getMessage());
 		}
 	}
 
 	// Método para cargar un grafo RDF desde una URL
-	public void cargarGrafoDesdeUrl(String url) {
+	public SparqlQueryResult cargarGrafoDesdeUrl(String url) {
 		try (RDFConnection conn = RDFConnection.connect(url)) {
 			Model model = conn.fetch();
 			dataset.setDefaultModel(model);
+			return SparqlQueryResult.forBottomMsg("Grafo remoto cargado correctamente");
 		} catch (Exception e) {
-			System.err.println("Error al cargar el grafo desde la URL: " + e.getMessage());
+			return SparqlQueryResult.forBottomMsg("Error al cargar el grafo desde la URL: " + e.getMessage());
 		}
 	}
 
@@ -48,7 +50,7 @@ public class GrafosJena {
 
     public SparqlQueryResult ejecutarConsultaSPARQL(String consulta) {
         if (dataset.isEmpty()) {
-            return new SparqlQueryResult(new ArrayList<>(), new ArrayList<>(), "El dataset está vacío. No se puede ejecutar la consulta.");
+            return SparqlQueryResult.forBottomMsg("El dataset está vacío. No se puede ejecutar la consulta.");
         }
 
         try {
@@ -67,16 +69,22 @@ public class GrafosJena {
                         }
                         rows.add(row);
                     }
-                    return new SparqlQueryResult(variables, rows, null);
+                    return SparqlQueryResult.forSelect(variables, rows);
                 } else if (query.isConstructType()) {
                     Model constructedModel = qExec.execConstruct();
-                    return new SparqlQueryResult(constructedModel, null);
+                    return SparqlQueryResult.forConstruct(constructedModel);
+                } else if (query.isDescribeType()) {
+                    Model describedModel = qExec.execDescribe();
+                    return SparqlQueryResult.forDescribe(describedModel);
+                } else if (query.isAskType()) {
+                    boolean askResult = qExec.execAsk();
+                    return SparqlQueryResult.forAsk(askResult);
                 } else {
-                    return new SparqlQueryResult(new ArrayList<>(), new ArrayList<>(), "Tipo de consulta no soportado: " + query.queryType());
+                    return SparqlQueryResult.forBottomMsg("Tipo de consulta no soportado: " + query.queryType());
                 }
             }
         } catch (Exception e) {
-            return new SparqlQueryResult(new ArrayList<>(), new ArrayList<>(), "Error al ejecutar la consulta SPARQL: " + e.getMessage());
+            return SparqlQueryResult.forBottomMsg("Error al ejecutar la consulta SPARQL: " + e.getMessage());
         }
     }
 

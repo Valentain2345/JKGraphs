@@ -1,16 +1,17 @@
 package org.aplication.KnowledgeGraphs;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class CytoscapeWindow {
 
@@ -39,7 +40,8 @@ public class CytoscapeWindow {
 
         HBox controls = new HBox(5, refreshButton);
         VBox root = new VBox(controls, webView);
-        Scene scene = new Scene(root);
+        VBox.setVgrow(webView, Priority.ALWAYS);
+        Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.setTitle("Cytoscape.js Graph Window");
 
@@ -85,9 +87,34 @@ public class CytoscapeWindow {
         }
     }
 
+    // Helper to generate a color palette in Java
+    private String generateColorPaletteJson(int count) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"colors\": [");
+        int avgR = 0, avgG = 0, avgB = 0;
+        for (int i = 0; i < count; i++) {
+            int colorInt = (int)(Math.random() * 0xFFFFFF);
+            String color = String.format("#%06X", colorInt);
+            sb.append('"').append(color).append('"');
+            if (i < count - 1) sb.append(",");
+            avgR += (colorInt >> 16) & 0xFF;
+            avgG += (colorInt >> 8) & 0xFF;
+            avgB += colorInt & 0xFF;
+        }
+        // Compute a contrasting background color
+        avgR /= count; avgG /= count; avgB /= count;
+        int contrastR = 255 - avgR;
+        int contrastG = 255 - avgG;
+        int contrastB = 255 - avgB;
+        String background = String.format("#%02X%02X%02X", contrastR, contrastG, contrastB);
+        sb.append("], \"background\": \"").append(background).append("\"}");
+        return sb.toString();
+    }
+
     private void loadDataIntoWebView(String json) {
+        String paletteJson = generateColorPaletteJson(5);
         String safeJson = json.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("\r", "").replace("\n", "");
-        String js = "window.loadCytoscapeData && window.loadCytoscapeData(JSON.parse('" + safeJson + "'));";
+        String js = "window.loadCytoscapeData && window.loadCytoscapeData(JSON.parse('" + safeJson + "'), JSON.parse('" + paletteJson + "'));";
         javafx.application.Platform.runLater(() -> webEngine.executeScript(js));
     }
 }

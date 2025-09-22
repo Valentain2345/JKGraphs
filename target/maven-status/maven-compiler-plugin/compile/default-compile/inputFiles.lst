@@ -4,7 +4,15 @@
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/aplication/KnowledgeGraphs/PrimaryController.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/aplication/KnowledgeGraphs/ResultRow.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/aplication/KnowledgeGraphs/SecondaryController.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/aplication/KnowledgeGraphs/UIUtils.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/CytoscapeGraphExporter.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/GrafosJena.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/GraphService.java
 /home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/SparqlQueryResult.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/SparqlQueryResultData.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/AskQueryExecutor.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/ConstructQueryExecutor.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/DescribeQueryExecutor.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/SelectQueryExecutor.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/SparqlQueryExecutor.java
+/home/vanadium/Documentos/Universidad/PFMaven/KnowledgeGraphs/src/main/java/org/logicaGrafo/query/SparqlQueryExecutorFactory.java

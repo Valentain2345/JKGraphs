@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ScrollPane?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="721.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aplication.KnowledgeGraphs.PrimaryController">
    <children>
@@ -50,7 +51,11 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </TableView>
-             <Text fx:id="errorMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+            <ScrollPane fitToWidth="true" fitToHeight="false" prefHeight="60.0" prefWidth="701.0">
+              <content>
+                <Text fx:id="bottomMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="680.0" />
+              </content>
+            </ScrollPane>
          </children>
       </VBox>
    </children>

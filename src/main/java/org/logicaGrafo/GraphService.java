@@ -1,8 +1,13 @@
 package org.logicaGrafo;
 
-import org.apache.jena.rdf.model.Model;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.rdf.model.Model;
+import org.logicaGrafo.query.SparqlQueryExecutor;
+import org.logicaGrafo.query.SparqlQueryExecutorFactory;
 
 /**
  * Service layer to handle graph-related operations.
@@ -11,21 +16,29 @@ public class GraphService {
 
     private final GrafosJena grafosJena;
 
-    
     public GraphService() {
         this.grafosJena = new GrafosJena();
     }
 
-    public void loadGraphFromFile(String filePath) {
-        grafosJena.cargarGrafoDesdeArchivo(filePath);
+    public SparqlQueryResult loadGraphFromFile(String filePath) {
+        return grafosJena.cargarGrafoDesdeArchivo(filePath);
     }
 
-    public void loadGraphFromUrl(String url) {
-        grafosJena.cargarGrafoDesdeUrl(url);
+    public SparqlQueryResult loadGraphFromUrl(String url) {
+        return grafosJena.cargarGrafoDesdeUrl(url);
     }
 
-    public SparqlQueryResult executeQuery(String query) {
-        return grafosJena.ejecutarConsultaSPARQL(query);
+    public SparqlQueryResult executeQuery(String queryStr) {
+        if (grafosJena.getModel() == null) {
+            return SparqlQueryResult.forBottomMsg("No RDF model loaded.");
+        }
+        try {
+            Query query = QueryFactory.create(queryStr);
+            SparqlQueryExecutor executor = SparqlQueryExecutorFactory.getExecutor(query);
+            return executor.execute(query, grafosJena.dataset);
+        } catch (Exception e) {
+            return SparqlQueryResult.forBottomMsg("Error executing query: " + e.getMessage());
+        }
     }
 
     public void exportGraph(String format, String filePath) {

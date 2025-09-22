@@ -21,15 +21,15 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
-
 public class PrimaryController {
     private final CytoscapeWindow cytoscapeWindow;
     private final GraphService graphService;
+    private final MessageService messageService;
 
     @FXML
     private TextArea queryInput;
     @FXML
-    private Text errorMessage;
+    private Text bottomMessage;
     @FXML
     private TableView<Map<String, String>> queryResultsTable;
 
@@ -38,6 +38,7 @@ public class PrimaryController {
     public PrimaryController() {
         this.graphService = new GraphService();
         this.cytoscapeWindow = new CytoscapeWindow();
+        this.messageService = new MessageService();
     }
 
     @FXML
@@ -64,9 +65,15 @@ public class PrimaryController {
         fileChooser.setTitle("Seleccionar archivo RDF");
         File file = fileChooser.showOpenDialog(queryInput.getScene().getWindow());
         if (file != null) {
-            graphService.loadGraphFromFile(file.getAbsolutePath());
-            errorMessage.setText("Archivo cargado: " + file.getName());
-            updateGraphView();
+            try {
+                SparqlQueryResult result = graphService.loadGraphFromFile(file.getAbsolutePath());
+                messageService.updateMessage(bottomMessage, result.getError());
+                if (!result.hasError()) {
+                    updateGraphView();
+                }
+            } catch (Exception e) {
+                UIUtils.showErrorDialog("Error", "No se pudo cargar el archivo: " + e.getMessage());
+            }
         }
     }
 
@@ -78,9 +85,15 @@ public class PrimaryController {
         dialog.setContentText("URL:");
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(url -> {
-            graphService.loadGraphFromUrl(url);
-            errorMessage.setText("Grafo remoto cargado");
-            updateGraphView();
+            try {
+                SparqlQueryResult loadResult = graphService.loadGraphFromUrl(url);
+                messageService.updateMessage(bottomMessage, loadResult.getError());
+                if (!loadResult.hasError()) {
+                    updateGraphView();
+                }
+            } catch (Exception e) {
+                UIUtils.showErrorDialog("Error", "No se pudo cargar el grafo remoto: " + e.getMessage());
+            }
         });
     }
 
@@ -89,26 +102,34 @@ public class PrimaryController {
         String query = queryInput.getText();
         SparqlQueryResult result = graphService.executeQuery(query);
         results.clear();
-        errorMessage.setText("");
+        messageService.clearMessage(bottomMessage);
         queryResultsTable.getColumns().clear();
+        queryResultsTable.setVisible(false);
 
         if (result.hasError()) {
-            errorMessage.setText(result.getError());
+            messageService.updateMessage(bottomMessage, result.getError());
             return;
         }
 
-        List<String> variables = result.getVariables();
-        for (String var : variables) {
-            TableColumn<Map<String, String>, String> col = new TableColumn<>(var);
-            col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(var)));
-            queryResultsTable.getColumns().add(col);
+        if (result.isSelect()) {
+            List<String> variables = result.getVariables();
+            for (String var : variables) {
+                TableColumn<Map<String, String>, String> col = new TableColumn<>(var);
+                col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(var)));
+                queryResultsTable.getColumns().add(col);
+            }
+            results.addAll(result.getRows());
+            queryResultsTable.setVisible(true);
+        } else if (result.isAsk()) {
+            messageService.updateMessage(bottomMessage, "ASK result: " + (result.getAskResult() != null ? result.getAskResult().toString() : "null"));
+        } else if (result.isConstruct() || result.isDescribe()) {
+            messageService.updateMessage(bottomMessage, (result.isConstruct() ? "CONSTRUCT" : "DESCRIBE") + " query executed. Graph updated.");
         }
-        results.addAll(result.getRows());
 
         Model modelToExport = null;
-        if (result.isConstruct()) {
-            modelToExport = result.getConstructedModel();
-        } else if (variables.contains("s") && variables.contains("p") && variables.contains("o")) {
+        if (result.isConstruct() || result.isDescribe()) {
+            modelToExport = result.getModelResult();
+        } else if (result.isSelect() && result.getVariables().contains("s") && result.getVariables().contains("p") && result.getVariables().contains("o")) {
             modelToExport = graphService.createModelFromTriples(result.getRows());
         }
 
@@ -132,7 +153,7 @@ public class PrimaryController {
         File file = fileChooser.showSaveDialog(queryInput.getScene().getWindow());
         if (file != null) {
             graphService.exportGraph(format, file.getAbsolutePath());
-            errorMessage.setText("Grafo exportado a " + file.getName());
+            messageService.updateMessage(bottomMessage, "Grafo exportado a " + file.getName());
         }
     }
 
@@ -154,5 +175,19 @@ public class PrimaryController {
     @FXML
     private void exportRdfJson() {
         exportGraph("RDF/JSON", "json");
+    }
+}
+
+class MessageService {
+    public void updateMessage(Text textElement, String message) {
+        if (textElement != null) {
+            textElement.setText(message);
+        }
+    }
+
+    public void clearMessage(Text textElement) {
+        if (textElement != null) {
+            textElement.setText("");
+        }
     }
 }
