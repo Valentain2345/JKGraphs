@@ -12,6 +12,7 @@ org/logicaGrafo/GrafosJena.class
 org/logicaGrafo/CytoscapeGraphExporter.class
 org/aplication/KnowledgeGraphs/CytoscapeWindow.class
 org/logicaGrafo/SparqlQueryResult.class
+org/aplication/KnowledgeGraphs/PrimaryController$1.class
 org/aplication/KnowledgeGraphs/Main.class
 org/logicaGrafo/query/DescribeQueryExecutor.class
 org/logicaGrafo/query/AskQueryExecutor.class

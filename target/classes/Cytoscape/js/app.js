@@ -29,9 +29,19 @@ window.loadCytoscapeData = function(data, palette) {
         log('Error loading Cytoscape data: ' + e);
     }
 };
+// Change layout function exposed to Java
+window.changeLayout = function(layoutName) {
+    if (window.cy) {
+        changeLayout(window.cy, layoutName);
+    } else {
+        log('Cytoscape instance not initialized');
+    }
+};
+
 
 // Optionally, reload graph if needed
 window.reloadCytoscape = function() {
     log('Reload requested');
     // This can be extended to reload data if needed
+	
 };

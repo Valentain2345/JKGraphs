@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -26,7 +27,7 @@ public class CytoscapeWindow {
         webView = new WebView();
         webEngine = webView.getEngine();
 
-        String htmlPath = getClass().getResource("/html/cytoscape.html").toExternalForm();
+        String htmlPath = getClass().getResource("/Cytoscape/cytoscape.html").toExternalForm();
         if (htmlPath == null) {
             System.err.println("Error: cytoscape.html not found in resources/html/");
             return;
@@ -35,16 +36,28 @@ public class CytoscapeWindow {
 
         Button refreshButton = new Button("Refresh");
         refreshButton.setOnAction(event -> reloadGraphData());
-
-     
+       
+        ComboBox<String> layoutCombo = new ComboBox<>();
+        layoutCombo.getItems().addAll("grid", "circle", "concentric", ""
+        		+ "breadthfirst", "cose", "cose-bilkent", "dagre");
+        layoutCombo.setValue("circle");
+        layoutCombo.setOnAction(event -> {
+        				String layout = layoutCombo.getValue();
+        				setLayout(layout);
+        });
 
         HBox controls = new HBox(5, refreshButton);
+        controls.setStyle("-fx-padding: 5; -fx-background-color: #ddd;");
+        controls.getChildren().add(layoutCombo);
+        	  
+       
         VBox root = new VBox(controls, webView);
         VBox.setVgrow(webView, Priority.ALWAYS);
         Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
         stage.setTitle("Cytoscape.js Graph Window");
 
+        
         webEngine.getLoadWorker().stateProperty().addListener((obs, old, newVal) -> {
             if (newVal == Worker.State.SUCCEEDED) {
                 JSObject window = (JSObject) webEngine.executeScript("window");
@@ -110,6 +123,12 @@ public class CytoscapeWindow {
         sb.append("], \"background\": \"").append(background).append("\"}");
         return sb.toString();
     }
+    
+    public void setLayout(String layout) {
+		if (isWebViewReady()) {
+			webEngine.executeScript("window.setLayout && window.setLayout('" + layout + "');");
+		}
+	}
 
     private void loadDataIntoWebView(String json) {
         String paletteJson = generateColorPaletteJson(5);

@@ -89,6 +89,7 @@ public class GrafosJena {
 		    return SparqlQueryResult.forBottomMsg("Archivo cargado correctamente en formato "+formato.getName() );
 	}
 
+	
 	// Método para cargar un grafo RDF desde una URL
 	public SparqlQueryResult cargarGrafoDesdeUrl(String url) {
 		try (RDFConnection conn = RDFConnection.connect(url)) {

@@ -18,8 +18,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Callback;
+import javafx.beans.binding.Bindings;
 
 public class PrimaryController {
     private final CytoscapeWindow cytoscapeWindow;
@@ -45,6 +49,8 @@ public class PrimaryController {
     private void initialize() {
         if (queryResultsTable != null) {
             queryResultsTable.setItems(results);
+            // Set column resize policy - this is important for even distribution
+            queryResultsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         }
     }
 
@@ -113,13 +119,65 @@ public class PrimaryController {
 
         if (result.isSelect()) {
             List<String> variables = result.getVariables();
-            for (String var : variables) {
+
+            // Calculate the base width for each column
+            double tableWidth = queryResultsTable.getWidth();
+            if (tableWidth <= 0) {
+                tableWidth = 700; // Default width if table width is not yet set
+            }
+            double columnWidth = tableWidth / variables.size();
+
+            for (int i = 0; i < variables.size(); i++) {
+                String var = variables.get(i);
                 TableColumn<Map<String, String>, String> col = new TableColumn<>(var);
-                col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(var)));
+
+                // Set cell value factory
+                col.setCellValueFactory(cellData -> {
+                    String value = cellData.getValue().get(var);
+                    return new SimpleStringProperty(value != null ? value : "");
+                });
+
+                // Set column width properties for even distribution
+                col.setMinWidth(80); // Minimum width to ensure readability
+                col.setPrefWidth(columnWidth);
+                col.setMaxWidth(Double.MAX_VALUE);
+
+                // Enable text wrapping in cells for long content
+                col.setCellFactory(tc -> {
+                    TableCell<Map<String, String>, String> cell = new TableCell<Map<String, String>, String>() {
+                        @Override
+                        protected void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty || item == null) {
+                                setText(null);
+                                setGraphic(null);
+                            } else {
+                                // Create a label that wraps text
+                                Label label = new Label(item);
+                                label.setWrapText(true);
+                                label.setMaxWidth(Double.MAX_VALUE);
+                                setGraphic(label);
+                                setText(null);
+                            }
+                        }
+                    };
+                    cell.setPrefHeight(javafx.scene.control.Control.USE_COMPUTED_SIZE);
+                    return cell;
+                });
+
+                // Make columns sortable
+                col.setSortable(true);
+
+                // Add column to table
                 queryResultsTable.getColumns().add(col);
             }
+
+            // Ensure equal width distribution after columns are added
+            distributeColumnsEvenly();
+
             results.addAll(result.getRows());
             queryResultsTable.setVisible(true);
+
         } else if (result.isAsk()) {
             messageService.updateMessage(bottomMessage, "ASK result: " + (result.getAskResult() != null ? result.getAskResult().toString() : "null"));
         } else if (result.isConstruct() || result.isDescribe()) {
@@ -139,6 +197,29 @@ public class PrimaryController {
             graphService.exportForCytoscape(graphService.getModel(), "cytoscape-data.json");
         }
         cytoscapeWindow.reloadGraphData();
+    }
+
+    /**
+     * Distributes columns evenly across the table width
+     */
+    private void distributeColumnsEvenly() {
+        if (queryResultsTable.getColumns().isEmpty()) {
+            return;
+        }
+
+        // Force the table to layout
+        queryResultsTable.layout();
+
+        int columnCount = queryResultsTable.getColumns().size();
+
+        // Bind each column's preferred width to the table's width divided by column count
+        for (TableColumn<?, ?> column : queryResultsTable.getColumns()) {
+            column.prefWidthProperty().bind(
+                queryResultsTable.widthProperty()
+                    .subtract(2) // Account for table borders
+                    .divide(columnCount)
+            );
+        }
     }
 
     private void updateGraphView() {

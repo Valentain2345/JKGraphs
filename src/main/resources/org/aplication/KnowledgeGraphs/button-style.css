@@ -1,0 +1,31 @@
+.button {
+    -fx-font-size: 17px;
+    -fx-padding: 16 43 16 43; /* 1em ≈ 16px, 2.7em ≈ 43px */
+    -fx-font-weight: 500;
+    -fx-background-color: #1f2937;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: #374151; /* Lighter shade for hover effect */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 8, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: #111827; /* Darker shade when pressed */
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}
+
+.button:focused {
+    -fx-background-color: #1f2937;
+    -fx-border-color: #10b981;
+    -fx-border-width: 2;
+}
+.button {
+    -fx-background-color: linear-gradient(to bottom, #1f2937, #111827);
+}

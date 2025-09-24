@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 /**
  * JavaFX App
  */
@@ -15,35 +16,51 @@ public class App extends Application {
 
     private static Scene scene;
 
-    
-	@Override
+    @Override
     public void start(Stage stage) throws IOException {
-		setApplicationIcon(stage);
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        setApplicationIcon(stage);
+
+        // Load FXML
+        Parent root = loadFXML("primary");
+
+        // Create scene with initial size
+        scene = new Scene(root, 900, 700);
+
+        // Set minimum window size to prevent UI from becoming too small
+        stage.setMinWidth(600);
+        stage.setMinHeight(500);
+
+        // Optional: Set maximum size if needed
+        // stage.setMaxWidth(1400);
+        // stage.setMaxHeight(900);
+
+        stage.setTitle("Knowledge Graphs Application");
         stage.setScene(scene);
+
+        // Center the window on screen
+        stage.centerOnScreen();
+
         stage.show();
-	    }
+    }
 
+    private void setApplicationIcon(Stage stage) {
+        String[] iconSizes = {"128", "48", "32", "16"};
 
-	private void setApplicationIcon(Stage stage) {
-	    String[] iconSizes = {"128", "48", "32", "16"};
-	    
-	    for (String size : iconSizes) {
-	        try {
-	            String iconPath = "/Icons/app-icon-" + size + ".png";
-	            Image icon = new Image(getClass().getResourceAsStream(iconPath));
-	            if (!icon.isError()) {
-	                stage.getIcons().add(icon);
-	                System.out.println("Icon loaded: " + size + "x" + size);
-	                break;
-	            }
-	        } catch (Exception e) {
-	            System.err.println("Error loading " + size + " icon: " + e.getMessage());
-	        }
-	    }
-	}
-	
-	
+        for (String size : iconSizes) {
+            try {
+                String iconPath = "/icons/app-icon-" + size + ".png";
+                Image icon = new Image(getClass().getResourceAsStream(iconPath));
+                if (!icon.isError()) {
+                    stage.getIcons().add(icon);
+                    System.out.println("Icon loaded: " + size + "x" + size);
+                    break;
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading " + size + " icon: " + e.getMessage());
+            }
+        }
+    }
+
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
@@ -54,8 +71,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-    	
         launch();
     }
-
 }

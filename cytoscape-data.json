@@ -1,127 +1,61 @@
 {"elements": [
   {"data": {
-    "color": "#E3CEF0",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#direction"
+    "color": "#A363B0",
+    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag"
   }},
   {"data": {
-    "color": "#192132",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-  }},
-  {"data": {
-    "color": "#460937",
-    "id": "https://www.w3.org/TR/json-ld11/#the-rdf-compoundliteral-class-and-the-rdf-language-and-rdf-direction-properties"
-  }},
-  {"data": {
-    "color": "#4C83E5",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#CompoundLiteral"
-  }},
-  {"data": {
-    "color": "#C328DA",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON"
-  }},
-  {"data": {
-    "color": "#502396",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "color": "#6E5E5A",
-    "id": "http://www.w3.org/2000/01/rdf-schema#Datatype"
-  }},
-  {"data": {
-    "color": "#A3B077",
-    "id": "http://www.w3.org/2000/01/rdf-schema#Literal"
-  }},
-  {"data": {
-    "color": "#28F5DC",
-    "id": "https://www.w3.org/TR/json-ld11/#the-rdf-json-datatype"
-  }},
-  {"data": {
-    "color": "#96F82B",
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"
-  }},
-  {"data": {
-    "color": "#1FA220",
+    "color": "#0F50E9",
     "id": "http://www.w3.org/2000/01/rdf-schema#Class"
   }},
   {"data": {
-    "color": "#868C20",
+    "color": "#471B4C",
+    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  }},
+  {"data": {
+    "color": "#9C6F29",
+    "id": "http://www.w3.org/2000/01/rdf-schema#Container"
+  }},
+  {"data": {
+    "color": "#77AFBA",
+    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"
+  }},
+  {"data": {
+    "color": "#94A3E5",
     "id": "http://www.w3.org/2000/01/rdf-schema#Resource"
   }},
   {"data": {
     "id": "e1",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#direction",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
-  }},
-  {"data": {
-    "id": "e2",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#direction",
-    "label": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
-    "target": "https://www.w3.org/TR/json-ld11/#the-rdf-compoundliteral-class-and-the-rdf-language-and-rdf-direction-properties"
-  }},
-  {"data": {
-    "id": "e3",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#direction",
-    "label": "http://www.w3.org/2000/01/rdf-schema#domain",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#CompoundLiteral"
-  }},
-  {"data": {
-    "id": "e4",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e5",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Datatype"
-  }},
-  {"data": {
-    "id": "e6",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Literal"
-  }},
-  {"data": {
-    "id": "e7",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON",
-    "label": "http://www.w3.org/2000/01/rdf-schema#seeAlso",
-    "target": "https://www.w3.org/TR/json-ld11/#the-rdf-json-datatype"
-  }},
-  {"data": {
-    "id": "e8",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e9",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Datatype"
-  }},
-  {"data": {
-    "id": "e10",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Literal"
-  }},
-  {"data": {
-    "id": "e11",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e12",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
     "target": "http://www.w3.org/2000/01/rdf-schema#Class"
   }},
   {"data": {
-    "id": "e13",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
+    "id": "e2",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
+    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  }},
+  {"data": {
+    "id": "e3",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
+    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+    "target": "http://www.w3.org/2000/01/rdf-schema#Container"
+  }},
+  {"data": {
+    "id": "e4",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
+  }},
+  {"data": {
+    "id": "e5",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  }},
+  {"data": {
+    "id": "e6",
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
     "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
     "target": "http://www.w3.org/2000/01/rdf-schema#Resource"
   }}
