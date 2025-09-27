@@ -14,63 +14,63 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static Scene scene;
+	private static Scene scene;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-        setApplicationIcon(stage);
+	private static Parent loadFXML(String fxml) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+		return fxmlLoader.load();
+	}
 
-        // Load FXML
-        Parent root = loadFXML("primary");
+	public static void main(String[] args) {
+		launch();
+	}
 
-        // Create scene with initial size
-        scene = new Scene(root, 900, 700);
+	static void setRoot(String fxml) throws IOException {
+		scene.setRoot(loadFXML(fxml));
+	}
 
-        // Set minimum window size to prevent UI from becoming too small
-        stage.setMinWidth(600);
-        stage.setMinHeight(500);
+	private void setApplicationIcon(Stage stage) {
+		String[] iconSizes = { "128", "48", "32", "16" };
 
-        // Optional: Set maximum size if needed
-        // stage.setMaxWidth(1400);
-        // stage.setMaxHeight(900);
+		for (String size : iconSizes) {
+			try {
+				String iconPath = "/icons/app-icon-" + size + ".png";
+				Image icon = new Image(getClass().getResourceAsStream(iconPath));
+				if (!icon.isError()) {
+					stage.getIcons().add(icon);
+					System.out.println("Icon loaded: " + size + "x" + size);
+					break;
+				}
+			} catch (Exception e) {
+				System.err.println("Error loading " + size + " icon: " + e.getMessage());
+			}
+		}
+	}
 
-        stage.setTitle("Knowledge Graphs Application");
-        stage.setScene(scene);
+	@Override
+	public void start(Stage stage) throws IOException {
+		setApplicationIcon(stage);
 
-        // Center the window on screen
-        stage.centerOnScreen();
+		// Load FXML
+		Parent root = loadFXML("primary");
 
-        stage.show();
-    }
+		// Create scene with initial size
+		scene = new Scene(root, 900, 700);
 
-    private void setApplicationIcon(Stage stage) {
-        String[] iconSizes = {"128", "48", "32", "16"};
+		// Set minimum window size to prevent UI from becoming too small
+		stage.setMinWidth(600);
+		stage.setMinHeight(500);
 
-        for (String size : iconSizes) {
-            try {
-                String iconPath = "/icons/app-icon-" + size + ".png";
-                Image icon = new Image(getClass().getResourceAsStream(iconPath));
-                if (!icon.isError()) {
-                    stage.getIcons().add(icon);
-                    System.out.println("Icon loaded: " + size + "x" + size);
-                    break;
-                }
-            } catch (Exception e) {
-                System.err.println("Error loading " + size + " icon: " + e.getMessage());
-            }
-        }
-    }
+		// Optional: Set maximum size if needed
+		// stage.setMaxWidth(1400);
+		// stage.setMaxHeight(900);
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+		stage.setTitle("Knowledge Graphs Application");
+		stage.setScene(scene);
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
+		// Center the window on screen
+		stage.centerOnScreen();
 
-    public static void main(String[] args) {
-        launch();
-    }
+		stage.show();
+	}
 }

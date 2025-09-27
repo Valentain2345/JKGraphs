@@ -5,5 +5,5 @@ import org.apache.jena.query.Query;
 import org.logicaGrafo.SparqlQueryResult;
 
 public interface SparqlQueryExecutor {
-    SparqlQueryResult execute(Query query, Dataset dataset);
+	SparqlQueryResult execute(Query query, Dataset dataset);
 }

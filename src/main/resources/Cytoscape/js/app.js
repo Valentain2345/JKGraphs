@@ -16,12 +16,13 @@ window.loadCytoscapeData = function(data, palette) {
             }
         });
         var cyConfig = getCytoscapeConfig(palette);
-        var cy = cytoscape({
+        window.cy = cytoscape({
             container: document.getElementById('cy'),
             elements: data.elements,
             style: cyConfig.style,
             layout: cyConfig.layout
         });
+
         // Set background color
         document.getElementById('cy').style.backgroundColor = cyConfig.background || '#f5f6fa';
         log('Cytoscape graph loaded with ' + data.elements.length + ' elements');
@@ -29,8 +30,9 @@ window.loadCytoscapeData = function(data, palette) {
         log('Error loading Cytoscape data: ' + e);
     }
 };
-// Change layout function exposed to Java
-window.changeLayout = function(layoutName) {
+
+// Keep only window.setLayout to prevent recursion
+window.setLayout = function(layoutName) {
     if (window.cy) {
         changeLayout(window.cy, layoutName);
     } else {
@@ -38,10 +40,37 @@ window.changeLayout = function(layoutName) {
     }
 };
 
+window.saveAsPNG = function() {
+    if (window.cy) {
+        saveAsPNG(window.cy);
+    } else {
+        log('Cytoscape instance not initialized');
+    }
+};
 
-// Optionally, reload graph if needed
+window.addEventListener('resize', function() {
+    if (window.cy) {
+        window.cy.resize();
+    }
+});
+
 window.reloadCytoscape = function() {
     log('Reload requested');
-    // This can be extended to reload data if needed
 	
+};
+
+window.getPNGBase64 = function() {
+    if (window.cy) {
+        try {
+            var pngDataUrl = window.cy.png({ full: true, scale: 2, output: 'base64' });
+            var base64 = pngDataUrl.replace(/^data:image\/png;base64,/, '');
+            return base64;
+        } catch (e) {
+            log('Error getting PNG base64: ' + e);
+            return null;
+        }
+    } else {
+        log('Cytoscape instance not initialized');
+        return null;
+    }
 };

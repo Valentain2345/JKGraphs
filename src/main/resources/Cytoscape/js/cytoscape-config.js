@@ -1,8 +1,7 @@
 // Cytoscape style and layout config using palette
 function getCytoscapeConfig(palette) {
     // Randomly choose black or white for background
-    const backgrounds = ['#000000', '#ffffff'];
-    const backgroundColor = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+    const backgroundColor = "#ffffff"; // always white background
     // Compute edge color as contrast with background
     const edgeColor = getContrastingColor([backgroundColor]);
     return {

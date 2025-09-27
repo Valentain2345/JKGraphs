@@ -10,34 +10,37 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" fillWidth="true"
-      styleClass="main-container" stylesheets="@app-style.css"
-      xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.aplication.KnowledgeGraphs.PrimaryController">
+<VBox alignment="CENTER" fillWidth="true" styleClass="main-container" stylesheets="@app-style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.aplication.KnowledgeGraphs.PrimaryController">
    <children>
       <HBox alignment="CENTER_LEFT" spacing="10" styleClass="menu-bar">
          <children>
-            <MenuButton mnemonicParsing="false" text="Graficos" styleClass="menu-button">
+            <MenuButton mnemonicParsing="false" styleClass="menu-button" text="Visualization">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Graficar grafo" />
-                <MenuItem mnemonicParsing="false" text="Graficar tabla" />
+                <MenuItem mnemonicParsing="false" onAction="#showGraph" text="Show graph" />
+                <MenuItem mnemonicParsing="false" text="Show table" />
               </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Datos" styleClass="menu-button">
+            <MenuButton mnemonicParsing="false" styleClass="menu-button" text="Data">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="Abrir local" />
-                <MenuItem mnemonicParsing="false" onAction="#abrirRemoto" text="Abrir remoto" />
+                <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="open local file" />
+                <MenuItem mnemonicParsing="false" onAction="#abrirRemoto" text="open remote file" />
+                  <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="open many" />
               </items>
             </MenuButton>
-            <MenuButton mnemonicParsing="false" text="Exportar" styleClass="menu-button">
+            <MenuButton mnemonicParsing="false" styleClass="menu-button" text="Export">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#exportRdfXml" text="RDF/XML" />
                 <MenuItem mnemonicParsing="false" onAction="#exportTurtle" text="Turtle" />
                 <MenuItem mnemonicParsing="false" onAction="#exportNTriples" text="N-Triples" />
                 <MenuItem mnemonicParsing="false" onAction="#exportRdfJson" text="RDF/JSON" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
               </items>
             </MenuButton>
          </children>
@@ -46,18 +49,15 @@
          </padding>
       </HBox>
 
-      <VBox spacing="10" fillWidth="true" styleClass="content-container" VBox.vgrow="ALWAYS">
+      <VBox fillWidth="true" spacing="10" styleClass="content-container" VBox.vgrow="ALWAYS">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Escribir una query de sparql" styleClass="label-text" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-text" text="Write a SPARQL query" />
 
-            <TextArea fx:id="queryInput" prefRowCount="8" wrapText="true"
-                     styleClass="query-input" VBox.vgrow="SOMETIMES"
-                     text="SELECT  ?s ?p ?o &#10;WHERE { ?s ?p ?o }&#10;LIMIT 10" />
+            <TextArea fx:id="queryInput" prefRowCount="8" styleClass="query-input" text="SELECT  ?s ?p ?o &#10;WHERE { ?s ?p ?o }&#10;LIMIT 10" wrapText="true" VBox.vgrow="SOMETIMES" />
 
             <HBox alignment="CENTER" spacing="10">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#executeQuery"
-                         styleClass="execute-button" text="Execute Query" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#executeQuery" styleClass="execute-button" text="Execute Query" />
                </children>
                <padding>
                   <Insets bottom="10.0" top="10.0" />
@@ -73,7 +73,7 @@
                </columnResizePolicy>
             </TableView>
 
-            <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="60" maxHeight="100" styleClass="message-scroll">
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="100" minHeight="60" styleClass="message-scroll">
                <content>
                   <Text fx:id="bottomMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
                </content>

@@ -17,8 +17,8 @@
 .content-container {
     -fx-background-color: rgba(255, 255, 255, 0.1);
     -fx-background-radius: 15;
-    -fx-padding: 20;
-    -fx-spacing: 15;
+    -fx-padding: 0;
+    -fx-spacing: 0;
 }
 
 /* Menu bar styling */
@@ -31,7 +31,7 @@
 
 /* Menu buttons */
 .menu-button {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-color: "#ddd";
     -fx-text-fill: #2d3748;
     -fx-font-size: 14px;
     -fx-font-weight: 600;
@@ -41,7 +41,7 @@
 }
 
 .menu-button:hover {
-    -fx-background-color: white;
+    -fx-background-color: rgba(255,255,255,0.7);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
@@ -199,3 +199,82 @@
 .results-table .column-header-background .show-hide-columns-button {
     -fx-background-color: #e2e8f0;
 }
+
+/* --- Dropdown Menu Inspired by Uiverse.io and App Theme --- */
+.menu-button.paste-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #212121;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-border-width: 2;
+    -fx-border-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
+    -fx-padding: 10 15 10 15;
+}
+.menu-button.paste-button:hover {
+    -fx-background-radius: 15 15 0 0;
+    -fx-border-radius: 15 15 0 0;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4CAF50;
+    -fx-padding: 8 10 8 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 0;
+}
+.menu-item:hover {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #212121;
+}
+.menu-item:focused {
+    -fx-background-color: #212121;
+    -fx-text-fill: #4CAF50;
+}
+.menu {
+    -fx-background-color: #212121;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2;
+    -fx-background-radius: 0 15 15 15;
+    -fx-border-radius: 0 15 15 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);
+    -fx-padding: 0;
+    -fx-min-width: 200px;
+    -fx-font-size: 13px;
+}
+
+/* --- ListView Styling --- */
+.list-view.paste-listview {
+    -fx-background-color: rgba(255,255,255,0.95);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2;
+    -fx-padding: 8;
+    -fx-effect: dropshadow(gaussian, rgba(76,175,80,0.15), 10, 0, 0, 2);
+    -fx-font-size: 15px;
+}
+.list-view.paste-listview .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #212121;
+    -fx-font-size: 15px;
+    -fx-padding: 8 12 8 12;
+    -fx-border-radius: 10;
+}
+.list-view.paste-listview .list-cell:hover {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #fff;
+}
+.list-view.paste-listview .list-cell:selected {
+    -fx-background-color: linear-gradient(to right, #4CAF50, #667eea);
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+.list-view.paste-listview .list-cell:focused {
+    -fx-background-color: #212121;
+    -fx-text-fill: #4CAF50;
+}
+/* --- End Custom Styles --- */

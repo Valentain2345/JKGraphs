@@ -3,6 +3,7 @@ org/aplication/KnowledgeGraphs/PrimaryController.class
 org/logicaGrafo/SparqlQueryResultData.class
 org/logicaGrafo/query/ConstructQueryExecutor.class
 org/aplication/KnowledgeGraphs/ResultRow.class
+org/aplication/KnowledgeGraphs/PrimaryController$2.class
 org/logicaGrafo/GraphService.class
 org/aplication/KnowledgeGraphs/App.class
 org/aplication/KnowledgeGraphs/UIUtils.class

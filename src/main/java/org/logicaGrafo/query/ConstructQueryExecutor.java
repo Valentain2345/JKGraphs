@@ -8,13 +8,13 @@ import org.apache.jena.rdf.model.Model;
 import org.logicaGrafo.SparqlQueryResult;
 
 public class ConstructQueryExecutor implements SparqlQueryExecutor {
-    @Override
-    public SparqlQueryResult execute(Query query, Dataset dataset) {
-        try (QueryExecution qExec = QueryExecutionFactory.create(query, dataset)) {
-            Model model = qExec.execConstruct();
-            return SparqlQueryResult.forConstruct(model);
-        } catch (Exception e) {
-            return SparqlQueryResult.forBottomMsg(e.getMessage());
-        }
-    }
+	@Override
+	public SparqlQueryResult execute(Query query, Dataset dataset) {
+		try (QueryExecution qExec = QueryExecutionFactory.create(query, dataset)) {
+			Model model = qExec.execConstruct();
+			return SparqlQueryResult.forConstruct(model);
+		} catch (Exception e) {
+			return SparqlQueryResult.forBottomMsg(e.getMessage());
+		}
+	}
 }
