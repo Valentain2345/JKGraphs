@@ -24,9 +24,9 @@
             </MenuButton>
             <MenuButton mnemonicParsing="false" styleClass="menu-button" text="Data">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="open local file" />
-                <MenuItem mnemonicParsing="false" onAction="#abrirRemoto" text="open remote file" />
-                  <MenuItem mnemonicParsing="false" onAction="#abrirLocal" text="open many" />
+                <MenuItem mnemonicParsing="false" onAction="#openLocalDataset" text="open local file" />
+                <MenuItem mnemonicParsing="false" onAction="#openRemoteDataset" text="open remote file" />
+                  <MenuItem mnemonicParsing="false" onAction="#openMultipleDatasets" text="open many" />
               </items>
             </MenuButton>
             <MenuButton mnemonicParsing="false" styleClass="menu-button" text="Export">

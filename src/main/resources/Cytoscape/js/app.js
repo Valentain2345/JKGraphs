@@ -16,6 +16,13 @@ window.loadCytoscapeData = function(data, palette) {
             }
         });
         var cyConfig = getCytoscapeConfig(palette);
+        // Inject dynamic node size function into style
+        cyConfig.style.forEach(function(styleObj) {
+            if (styleObj.selector === 'node') {
+                styleObj.style.width = getNodeSize;
+                styleObj.style.height = getNodeSize;
+            }
+        });
         window.cy = cytoscape({
             container: document.getElementById('cy'),
             elements: data.elements,
@@ -74,3 +81,21 @@ window.getPNGBase64 = function() {
         return null;
     }
 };
+
+window.nodeSizeMetric = 'out'; // Default metric
+
+window.setNodeSizeMetric = function(metric) {
+    window.nodeSizeMetric = metric === 'in' ? 'in' : 'out';
+    if (window.cy) {
+        window.cy.style().update(); // Refresh style to apply new sizing
+    }
+};
+
+// Helper to compute node size based on selected metric
+function getNodeSize(node) {
+    if (!window.nodeSizeMetric || window.nodeSizeMetric === 'out') {
+        return 60 + 10 * node.outgoers('edge').length;
+    } else {
+        return 60 + 10 * node.incomers('edge').length;
+    }
+}

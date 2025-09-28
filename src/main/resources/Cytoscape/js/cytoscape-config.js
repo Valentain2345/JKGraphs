@@ -10,8 +10,6 @@ function getCytoscapeConfig(palette) {
                 selector: 'node',
                 style: {
                     'shape': 'ellipse',
-                    'width': 90,
-                    'height': 90,
                     'background-color': 'data(color)',
                     'background-image': 'data(backgroundImage)',
                     'background-fit': 'cover',
@@ -45,8 +43,8 @@ function getCytoscapeConfig(palette) {
             {
                 selector: 'node:selected',
                 style: {
-                    'width': 100,
-                    'height': 100,
+                    'width': function(node) { return getNodeSize(node) * 1.2; },
+                    'height': function(node) { return getNodeSize(node) * 1.2; },
                     'border-width': 8,
                     'border-color': '#FFD700', // gold
                     'color': '#1A4A7A', // highlight text color

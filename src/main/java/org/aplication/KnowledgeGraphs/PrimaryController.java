@@ -28,6 +28,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 class MessageService {
 	public void clearMessage(Text textElement) {
@@ -67,7 +68,7 @@ public class PrimaryController {
 	}
 
 	@FXML
-	private void abrirLocal() {
+	private void openLocalDataset() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Seleccionar archivo RDF");
 		File file = fileChooser.showOpenDialog(queryInput.getScene().getWindow());
@@ -83,14 +84,22 @@ public class PrimaryController {
 			}
 		}
 	}
+	
+	@FXML
+	private void openMultipleDatasets() {
+	
+	}
 
 	@FXML
-	private void abrirRemoto() {
+	private void openRemoteDataset() {
+		
 		TextInputDialog dialog = new TextInputDialog();
+		new UIUtils().setWindowIcon((Stage) dialog.getDialogPane().getScene().getWindow());
 		dialog.setTitle("Abrir grafo remoto");
 		dialog.setHeaderText("Introduce la URL del grafo RDF");
 		dialog.setContentText("URL:");
 		Optional<String> result = dialog.showAndWait();
+		
 		result.ifPresent(url -> {
 			try {
 				SparqlQueryResult loadResult = graphService.loadGraphFromUrl(url);
@@ -218,7 +227,7 @@ public class PrimaryController {
 		File file = fileChooser.showSaveDialog(queryInput.getScene().getWindow());
 		if (file != null) {
 			graphService.exportGraph(format, file.getAbsolutePath());
-			messageService.updateMessage(bottomMessage, "Grafo exportado a " + file.getName());
+			messageService.updateMessage(bottomMessage, "Exported graph to " + file.getName());
 		}
 	}
 
@@ -302,9 +311,10 @@ public class PrimaryController {
 		}
 		List<String> variables = lastQueryresult.getVariables();
 		// Create dialog window
-		javafx.stage.Stage dialogStage = new javafx.stage.Stage();
+		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Select Node and Edge Variables");
-		dialogStage.setResizable(false);
+		dialogStage.setResizable(true);
+		(new UIUtils()).setWindowIcon(dialogStage);
 		VBox vbox = new VBox(18);
 		vbox.setPadding(new javafx.geometry.Insets(24));
 		vbox.setStyle(

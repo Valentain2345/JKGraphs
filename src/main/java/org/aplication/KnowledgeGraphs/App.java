@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -29,27 +28,10 @@ public class App extends Application {
 		scene.setRoot(loadFXML(fxml));
 	}
 
-	private void setApplicationIcon(Stage stage) {
-		String[] iconSizes = { "128", "48", "32", "16" };
-
-		for (String size : iconSizes) {
-			try {
-				String iconPath = "/icons/app-icon-" + size + ".png";
-				Image icon = new Image(getClass().getResourceAsStream(iconPath));
-				if (!icon.isError()) {
-					stage.getIcons().add(icon);
-					System.out.println("Icon loaded: " + size + "x" + size);
-					break;
-				}
-			} catch (Exception e) {
-				System.err.println("Error loading " + size + " icon: " + e.getMessage());
-			}
-		}
-	}
-
+	
 	@Override
 	public void start(Stage stage) throws IOException {
-		setApplicationIcon(stage);
+		(new UIUtils()).setWindowIcon(stage);
 
 		// Load FXML
 		Parent root = loadFXML("primary");
@@ -61,10 +43,7 @@ public class App extends Application {
 		stage.setMinWidth(600);
 		stage.setMinHeight(500);
 
-		// Optional: Set maximum size if needed
-		// stage.setMaxWidth(1400);
-		// stage.setMaxHeight(900);
-
+		
 		stage.setTitle("Knowledge Graphs Application");
 		stage.setScene(scene);
 

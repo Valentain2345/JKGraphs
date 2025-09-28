@@ -4,40 +4,20 @@
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag"
   }},
   {"data": {
-    "id": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-  }},
-  {"data": {
     "id": "http://www.w3.org/2000/01/rdf-schema#Container",
     "label": "http://www.w3.org/2000/01/rdf-schema#Container"
-  }},
-  {"data": {
-    "id": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
   }},
   {"data": {
     "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   }},
   {"data": {
-    "id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
     "id": "http://www.w3.org/2000/01/rdf-schema#Class",
     "label": "http://www.w3.org/2000/01/rdf-schema#Class"
   }},
   {"data": {
-    "id": "http://www.w3.org/2000/01/rdf-schema#label",
-    "label": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
     "id": "Bag",
     "label": "Bag"
-  }},
-  {"data": {
-    "id": "http://www.w3.org/2000/01/rdf-schema#comment",
-    "label": "http://www.w3.org/2000/01/rdf-schema#comment"
   }},
   {"data": {
     "id": "The class of unordered containers.",
@@ -63,360 +43,60 @@
     "id": "e1",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+    "target": "http://www.w3.org/2000/01/rdf-schema#Container"
   }},
   {"data": {
     "id": "e2",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
+    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   }},
   {"data": {
     "id": "e3",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Container",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
+    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
   }},
   {"data": {
     "id": "e4",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Container"
+    "target": "Bag"
   }},
   {"data": {
     "id": "e5",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Container"
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
+    "target": "The class of unordered containers."
   }},
   {"data": {
     "id": "e6",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Container",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Container"
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "target": "http://www.w3.org/2000/01/rdf-schema#Resource"
   }},
   {"data": {
     "id": "e7",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   }},
   {"data": {
     "id": "e8",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
   }},
   {"data": {
     "id": "e9",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
+    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
+    "target": "Statement"
   }},
   {"data": {
     "id": "e10",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e11",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e12",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e13",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e14",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e15",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Class",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e16",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e17",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e18",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Class",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e19",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e20",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#label",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e21",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e22",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "Bag"
-  }},
-  {"data": {
-    "id": "e23",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#label",
-    "target": "Bag"
-  }},
-  {"data": {
-    "id": "e24",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "Bag",
-    "target": "Bag"
-  }},
-  {"data": {
-    "id": "e25",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e26",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#comment",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e27",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "The class of unordered containers.",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e28",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "target": "The class of unordered containers."
-  }},
-  {"data": {
-    "id": "e29",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "http://www.w3.org/2000/01/rdf-schema#comment",
-    "target": "The class of unordered containers."
-  }},
-  {"data": {
-    "id": "e30",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag",
-    "label": "The class of unordered containers.",
-    "target": "The class of unordered containers."
-  }},
-  {"data": {
-    "id": "e31",
     "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
     "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-  }},
-  {"data": {
-    "id": "e32",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-  }},
-  {"data": {
-    "id": "e33",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Resource",
-    "target": "http://www.w3.org/2000/01/rdf-schema#subClassOf"
-  }},
-  {"data": {
-    "id": "e34",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Resource"
-  }},
-  {"data": {
-    "id": "e35",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Resource"
-  }},
-  {"data": {
-    "id": "e36",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Resource",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Resource"
-  }},
-  {"data": {
-    "id": "e37",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
-  }},
-  {"data": {
-    "id": "e38",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
-  }},
-  {"data": {
-    "id": "e39",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "target": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy"
-  }},
-  {"data": {
-    "id": "e40",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e41",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e42",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  }},
-  {"data": {
-    "id": "e43",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e44",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e45",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Class",
-    "target": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-  }},
-  {"data": {
-    "id": "e46",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e47",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e48",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#Class",
-    "target": "http://www.w3.org/2000/01/rdf-schema#Class"
-  }},
-  {"data": {
-    "id": "e49",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e50",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#label",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e51",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#label"
-  }},
-  {"data": {
-    "id": "e52",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "Statement"
-  }},
-  {"data": {
-    "id": "e53",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#label",
-    "target": "Statement"
-  }},
-  {"data": {
-    "id": "e54",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "Statement",
-    "target": "Statement"
-  }},
-  {"data": {
-    "id": "e55",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e56",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#comment",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e57",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "The class of RDF statements.",
-    "target": "http://www.w3.org/2000/01/rdf-schema#comment"
-  }},
-  {"data": {
-    "id": "e58",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "target": "The class of RDF statements."
-  }},
-  {"data": {
-    "id": "e59",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "http://www.w3.org/2000/01/rdf-schema#comment",
-    "target": "The class of RDF statements."
-  }},
-  {"data": {
-    "id": "e60",
-    "source": "http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement",
-    "label": "The class of RDF statements.",
     "target": "The class of RDF statements."
   }}
 ]}

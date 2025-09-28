@@ -2,7 +2,35 @@
 <html>
 <head>
     <title>Cytoscape.js in JavaFX</title>
-    <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
+	<!-- Core Library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+   <!-- Base Dependencies -->
+	   <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+	   <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.5.7/shim.min.js"></script>
+	   <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+	   <script src="js/cytoscape-avsdf.js"></script>
+
+	   <!-- Cola Layout Dependencies -->
+	   <script src="https://unpkg.com/webcola/WebCola/cola.min.js"></script>
+	   <script src="https://unpkg.com/cytoscape-cola/cytoscape-cola.js"></script>
+
+	   <!-- Dagre Layout -->
+	   <script src="https://unpkg.com/dagre/dist/dagre.min.js"></script>
+	   <script src="https://unpkg.com/cytoscape-dagre/cytoscape-dagre.js"></script>
+
+	   <!-- ELK Layout Dependencies -->
+	   <script src="https://cdn.jsdelivr.net/npm/elkjs@0.9.3/lib/elk.bundled.js"></script>
+	   <script src="https://unpkg.com/cytoscape-elk@2.3.0/dist/cytoscape-elk.js"></script>
+
+	   <!-- Other Layout Extensions -->
+	   <script src="https://unpkg.com/cytoscape-fcose/cytoscape-fcose.js"></script>
+	   <script src="https://unpkg.com/cytoscape-cose-bilkent/cytoscape-cose-bilkent.js"></script>
+	   <script src="https://unpkg.com/cytoscape-cise/cytoscape-cise.js"></script>
+	   <script src="https://unpkg.com/klayjs@0.4.1/klay.js"></script>
+	   <script src="cytoscape-klay.js"></script>
+
+
     <script src="js/colors.js"></script>
     <script src="js/cytoscape-config.js"></script>
     <script src="js/app.js"></script>

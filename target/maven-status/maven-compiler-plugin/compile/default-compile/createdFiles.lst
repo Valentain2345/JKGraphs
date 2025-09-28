@@ -17,6 +17,5 @@ org/aplication/KnowledgeGraphs/PrimaryController$1.class
 org/aplication/KnowledgeGraphs/Main.class
 org/logicaGrafo/query/DescribeQueryExecutor.class
 org/logicaGrafo/query/AskQueryExecutor.class
-org/aplication/KnowledgeGraphs/SecondaryController.class
 org/logicaGrafo/query/SparqlQueryExecutor.class
 org/logicaGrafo/query/SelectQueryExecutor.class

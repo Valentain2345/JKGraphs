@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import netscape.javascript.JSObject;
+import org.aplication.KnowledgeGraphs.UIUtils;
 
 public class CytoscapeWindow {
 
@@ -34,6 +36,7 @@ public class CytoscapeWindow {
 
 	private String pendingJson = null;
 	private ComboBox<String> layoutCombo; // Make ComboBox a field
+	private ComboBox<String> nodeSizeMetricCombo; // Node size metric selector
 
 	public CytoscapeWindow() {
 		stage = new Stage();
@@ -52,15 +55,29 @@ public class CytoscapeWindow {
 		refreshButton.setOnAction(event -> reloadGraphData());
 		refreshButton.getStyleClass().add("menu-button");
 
+		Label layoutLabel = new Label("Layout:");
+		layoutLabel.setStyle("-fx-font-weight: bold; -fx-padding: 0 8 0 8; -fx-alignment: center; -fx-font-size: 14px; -fx-text-fill: #1A4A7A;");
 		layoutCombo = new ComboBox<>();
-		layoutCombo.getItems().addAll("grid", "circle", "concentric", "breadthfirst", "cose","random");
-		//"cola","dagre","cose-bilkent");
+		layoutCombo.getItems().addAll("grid", "circle", "concentric", "breadthfirst", "cose", "random", "avsdf","cola", "dagre", "elk", "fcose", "cose-bilkent", "cise");
 		layoutCombo.setValue("circle");
 		layoutCombo.setOnAction(event -> {
 			String layout = layoutCombo.getValue();
 			setLayout(layout);
 		});
 		layoutCombo.getStyleClass().add("menu-button");
+
+		Label metricLabel = new Label("Node Size Metric:");
+		metricLabel.setStyle("-fx-font-weight: bold; -fx-padding: 0 8 0 8; -fx-alignment: center; -fx-font-size: 14px; -fx-text-fill: #1A4A7A;");
+		nodeSizeMetricCombo = new ComboBox<>();
+		nodeSizeMetricCombo.getItems().addAll("Outgoing edges", "Ingoing edges");
+		nodeSizeMetricCombo.setValue("Outgoing edges");
+		nodeSizeMetricCombo.setOnAction(event -> {
+			String metric = nodeSizeMetricCombo.getValue().equals("Ingoing edges") ? "in" : "out";
+			if (isWebViewReady()) {
+				webEngine.executeScript("window.setNodeSizeMetric('" + metric + "')");
+			}
+		});
+		nodeSizeMetricCombo.getStyleClass().add("menu-button");
 
 		Button saveButton = new Button("Save as PNG");
 		saveButton.setOnAction(event -> {
@@ -87,7 +104,7 @@ public class CytoscapeWindow {
 		saveButton.getStyleClass().add("menu-button");
 		// Add saveButton to controls
 
-		HBox controls = new HBox(3, refreshButton, layoutCombo, saveButton);
+		HBox controls = new HBox(9, refreshButton,layoutLabel ,layoutCombo, metricLabel, nodeSizeMetricCombo, saveButton);
 		controls.setStyle("-fx-padding: 10; -fx-background-color: #ffffff;");
 		controls.getStyleClass().add("menu-bar");
 		controls.setMaxWidth(Double.MAX_VALUE);
@@ -106,6 +123,8 @@ public class CytoscapeWindow {
 		scene.getStylesheets().add(getClass().getResource("app-style.css").toExternalForm());
 		stage.setScene(scene);
 		stage.setTitle("Cytoscape.js Graph Window");
+		stage.setResizable(true);
+		(new UIUtils()).setWindowIcon(stage);
 		
 		webEngine.getLoadWorker().stateProperty().addListener((obs, old, newVal) -> {
 			if (newVal == Worker.State.SUCCEEDED) {
